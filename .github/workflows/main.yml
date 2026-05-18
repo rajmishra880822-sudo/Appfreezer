@@ -18,11 +18,16 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+
     - name: Make gradlew executable
       run: chmod +x AppFreezer/gradlew
 
     - name: Build APK
-      run: cd AppFreezer && ./gradlew assembleDebug
+      run: |
+        cd AppFreezer
+        ./gradlew assembleDebug --stacktrace
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
